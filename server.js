@@ -7,13 +7,6 @@ const path = require('path')
 const connectDb = require('./config/connectDb')
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-
 
 //config dot env file
 dotenv.config();
@@ -28,6 +21,13 @@ const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 //routes
 /*app.use(
